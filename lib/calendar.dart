@@ -64,6 +64,11 @@ class _CalendarState extends State<Calendar> {
                 },
               ),
               daysOfWeekVisible: true,
+              daysOfWeekStyle: DaysOfWeekStyle(
+                decoration: BoxDecoration(
+                    color: Colors.black26
+                ),
+              ),
 
               //Day Changed
               onDaySelected: (DateTime selectDay, DateTime focusDay) {
@@ -105,14 +110,9 @@ class _CalendarState extends State<Calendar> {
               headerStyle: HeaderStyle(
                 formatButtonVisible: false,
                 titleCentered: true,
-                formatButtonShowsNext: false,
-                formatButtonDecoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                formatButtonTextStyle: TextStyle(
-                  color: Colors.white,
-                ),
+                decoration: BoxDecoration(
+                  color: Colors.black38
+                )
               ),
             ),
             color: Colors.black12,
