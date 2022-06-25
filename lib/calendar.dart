@@ -45,6 +45,7 @@ class _CalendarState extends State<Calendar> {
         children: [
           TableCalendar(
             locale: 'ru_RU',
+            startingDayOfWeek: StartingDayOfWeek.monday,
             focusedDay: selectedDay,
             firstDay: DateTime(1990),
             lastDay: DateTime(2050),
@@ -66,7 +67,6 @@ class _CalendarState extends State<Calendar> {
                 format = _format;
               });
             },
-            startingDayOfWeek: StartingDayOfWeek.sunday,
             daysOfWeekVisible: true,
 
             //Day Changed
