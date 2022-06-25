@@ -21,15 +21,18 @@ class _CalendarState extends State<Calendar> {
   String _time;
   String _day;
 
+
   @override
   void initState() {
     selectedEvents = {};
     _time = _formatDateTime(DateTime.now());
-    Timer.periodic(Duration(seconds: 1), (t) => _getTime());
+    Timer.periodic(Duration(seconds: 60), (t) => _getTime());
     _day = _formatDateTime(DateTime.now());
-    Timer.periodic(Duration(seconds: 1), (t) => _getDay());
+    Timer.periodic(Duration(seconds: 60), (t) => _getDay());
     super.initState();
   }
+
+
 
   List<Event> _getEventsfromDay(DateTime date) {
     return selectedEvents[date] ?? [];
