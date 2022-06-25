@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:calendar/event.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 
@@ -15,10 +18,16 @@ class _CalendarState extends State<Calendar> {
   DateTime focusedDay = DateTime.now();
 
   TextEditingController _eventController = TextEditingController();
+  String _time;
+  String _day;
 
   @override
   void initState() {
     selectedEvents = {};
+    _time = _formatDateTime(DateTime.now());
+    Timer.periodic(Duration(seconds: 1), (t) => _getTime());
+    _day = _formatDateTime(DateTime.now());
+    Timer.periodic(Duration(seconds: 1), (t) => _getDay());
     super.initState();
   }
 
@@ -37,12 +46,37 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Calendar"),
-        centerTitle: true,
-      ),
+
       body: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Align(
+              alignment: Alignment.lerp(Alignment.bottomLeft, Alignment.bottomCenter,0.1),
+              child: Text(
+                _time,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 42,
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Align(
+              alignment: Alignment.lerp(Alignment.bottomLeft, Alignment.bottomCenter,0.1),
+              child: Text(
+                _day,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ),
+
           Container(
             child: TableCalendar(
               locale: 'ru_RU',
@@ -116,7 +150,7 @@ class _CalendarState extends State<Calendar> {
               ),
             ),
             color: Colors.black12,
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(35),
           ),
           ..._getEventsfromDay(selectedDay).map(
             (Event event) => ListTile(
@@ -211,5 +245,28 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formatted = _formatDateTime(now);
+    setState(() {
+      _time = formatted;
+    });
+  }
+
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat.Hm('ru-RU').format(dateTime);
+  }
+
+  void _getDay() {
+    final DateTime now = DateTime.now();
+    final String formatted = _formatDate(now);
+    setState(() {
+      _day = formatted;
+    });
+  }
+
+  String _formatDate(DateTime dateTime) {
+    return DateFormat('dd.MM.yyyy').format(dateTime);
+  }
 }
 
