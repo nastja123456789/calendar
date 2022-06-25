@@ -62,11 +62,11 @@ class _CalendarState extends State<Calendar> {
                 );
               },
             ),
-            onFormatChanged: (CalendarFormat _format) {
-              setState(() {
-                format = _format;
-              });
-            },
+            // onFormatChanged: (CalendarFormat _format) {
+            //   setState(() {
+            //     format = _format;
+            //   });
+            // },
             daysOfWeekVisible: true,
 
             //Day Changed
@@ -107,7 +107,7 @@ class _CalendarState extends State<Calendar> {
               ),
             ),
             headerStyle: HeaderStyle(
-              formatButtonVisible: true,
+              formatButtonVisible: false,
               titleCentered: true,
               formatButtonShowsNext: false,
               formatButtonDecoration: BoxDecoration(
